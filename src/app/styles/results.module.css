@@ -1,0 +1,168 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.resultsContainer {
+  width: 100%;
+  max-width: 800px;
+  padding: 30px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.resultsContainer h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 32px;
+}
+
+.resultsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.resultCard {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 15px;
+  gap: 20px;
+}
+
+.rank {
+  font-size: 24px;
+  font-weight: bold;
+  color: #666;
+  min-width: 40px;
+  text-align: center;
+}
+
+.restaurantInfo {
+  flex: 1;
+}
+
+.restaurantInfo h2 {
+  margin: 0;
+  color: #333;
+  font-size: 20px;
+}
+
+.cuisine {
+  color: #666;
+  margin: 5px 0;
+}
+
+.details {
+  display: flex;
+  gap: 15px;
+  margin: 10px 0;
+}
+
+.rating {
+  color: #f39c12;
+  font-weight: 500;
+}
+
+.price {
+  color: #27ae60;
+  font-weight: 500;
+}
+
+.address {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+}
+
+.voteInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.voteCount {
+  display: flex;
+  gap: 15px;
+}
+
+.likes {
+  color: #27ae60;
+  font-weight: 500;
+}
+
+.dislikes {
+  color: #e74c3c;
+  font-weight: 500;
+}
+
+.score {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.newSessionButton {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 30px auto 0;
+  padding: 15px 30px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.newSessionButton:hover {
+  background-color: #2980b9;
+}
+
+.loading {
+  font-size: 20px;
+  color: #666;
+  text-align: center;
+}
+
+.error {
+  color: #e74c3c;
+  text-align: center;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .resultsContainer {
+    padding: 20px;
+  }
+
+  .resultCard {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .voteInfo {
+    align-items: center;
+  }
+
+  .details {
+    justify-content: center;
+  }
+} 

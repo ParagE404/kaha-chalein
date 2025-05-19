@@ -1,0 +1,96 @@
+.cards-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background-color: #ddd;
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+
+.progress {
+  height: 100%;
+  background-color: #007bff;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.card-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+.restaurant-card {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.restaurant-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.restaurant-info {
+  padding: 20px;
+}
+
+.restaurant-info h2 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.location {
+  color: #666;
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+.cuisine {
+  color: #888;
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+.swipe-instructions {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+/* Swipe animations */
+.card-container.swiping-left .restaurant-card {
+  transform: rotate(-30deg) translateX(-100px);
+  opacity: 0;
+}
+
+.card-container.swiping-right .restaurant-card {
+  transform: rotate(30deg) translateX(100px);
+  opacity: 0;
+} 

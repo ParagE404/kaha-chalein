@@ -1,0 +1,109 @@
+.results-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f5f5;
+}
+
+.results-container h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.result-card {
+  width: 100%;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.result-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.result-info {
+  padding: 20px;
+}
+
+.result-info h2 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.location {
+  color: #666;
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+.cuisine {
+  color: #888;
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+.match-stats {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.match-stats p {
+  margin: 5px 0;
+  color: #007bff;
+  font-weight: 500;
+}
+
+.action-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.view-details-btn,
+.new-session-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-details-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.view-details-btn:hover {
+  background-color: #0056b3;
+}
+
+.new-session-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.new-session-btn:hover {
+  background-color: #5a6268;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+} 
