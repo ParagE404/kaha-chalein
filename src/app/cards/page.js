@@ -47,7 +47,27 @@ export default function CardsPage() {
 
       socket.on('connect', () => {
         console.log('Socket connected:', socket.id);
-        reconnectAttempts = 0; // Reset reconnect attempts on successful connection
+        reconnectAttempts = 0;
+        
+        // Get user data from localStorage
+        const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+        
+        if (sessionId) {
+          // Join existing session
+          socket.emit('joinSession', {
+            sessionId,
+            userData: {
+              name: userData.name || 'Anonymous'
+            }
+          });
+        } else {
+          // Create new session
+          socket.emit('createSession', {
+            userData: {
+              name: userData.name || 'Anonymous'
+            }
+          });
+        }
       });
 
       socket.on('connect_error', (error) => {
@@ -79,13 +99,10 @@ export default function CardsPage() {
       });
 
       // Socket event handlers
-      socket.on('sessionCreated', ({ sessionId, totalUsers, votedUsers, votedUsersList }) => {
-        console.log('Session created:', { sessionId, totalUsers, votedUsers });
-        setVotingProgress({
-          totalUsers,
-          votedUsers,
-          votedUsersList
-        });
+      socket.on('sessionCreated', ({ sessionId: newSessionId }) => {
+        console.log('Session created:', newSessionId);
+        // Update URL with new session ID
+        router.push(`/cards?session=${newSessionId}`);
       });
 
       socket.on('userJoined', ({ user, totalUsers, votedUsers, votedUsersList }) => {
@@ -125,12 +142,36 @@ export default function CardsPage() {
         if (waitingTimeout) {
           clearTimeout(waitingTimeout);
         }
+        // Store results in localStorage for the results page
+        localStorage.setItem('votingResults', JSON.stringify(results));
         router.push(`/results?session=${sessionId}`);
       });
 
       socket.on('error', ({ message }) => {
         console.error('Socket error:', message);
         setError(message);
+        // If session not found, redirect to home
+        if (message === 'Session not found') {
+          router.push('/');
+        }
+      });
+
+      // Add session state handler
+      socket.on('sessionState', ({ restaurants: sessionRestaurants, votes }) => {
+        console.log('Received session state:', { sessionRestaurants, votes });
+        if (sessionRestaurants && sessionRestaurants.length > 0) {
+          setRestaurants(sessionRestaurants);
+          setIsLoading(false);
+        }
+      });
+
+      // Add restaurants updated handler
+      socket.on('restaurantsUpdated', ({ restaurants: newRestaurants }) => {
+        console.log('Restaurants updated:', newRestaurants);
+        setRestaurants(newRestaurants);
+        setCurrentIndex(0);
+        setHasVoted(false);
+        setIsLoading(false);
       });
 
       setSocket(socket);
@@ -138,24 +179,48 @@ export default function CardsPage() {
 
     connectSocket();
 
-    // Fetch restaurants
-    fetch('http://localhost:3001/api/restaurants', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ types: [] })
-    })
-    .then(res => res.json())
-    .then(data => {
-      setRestaurants(data);
-      setIsLoading(false);
-    })
-    .catch(err => {
-      console.error('Error fetching restaurants:', err);
-      setError('Failed to load restaurants');
-      setIsLoading(false);
-    });
+    // Fetch restaurants only if we don't have them in the session
+    if (!restaurants.length) {
+      const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+      const selectedTypes = JSON.parse(localStorage.getItem('selectedTypes') || '[]');
+      
+      fetch('http://localhost:3001/api/restaurants', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          types: selectedTypes,
+          location: userData.location || 'Mumbai'
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (!data || data.error) {
+          throw new Error(data.error || 'Failed to fetch restaurants');
+        }
+        // Set restaurants in the session
+        return fetch('http://localhost:3001/api/session/restaurants', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            sessionId,
+            restaurants: data
+          })
+        })
+        .then(() => {
+          setRestaurants(data);
+          setIsLoading(false);
+        });
+      })
+      .catch(err => {
+        console.error('Error:', err);
+        setError(err.message || 'Failed to load restaurants');
+        setIsLoading(false);
+      });
+    }
 
     return () => {
       if (waitingTimeout) {
@@ -172,9 +237,21 @@ export default function CardsPage() {
     if (hasVoted) {
       const timeout = setTimeout(() => {
         setError('Waiting too long for other users. Redirecting to results...');
-        setTimeout(() => {
-          router.push(`/results?session=${sessionId}`);
-        }, 2000);
+        // Fetch results directly if timeout occurs
+        fetch(`http://localhost:3001/api/results?session=${sessionId}`)
+          .then(res => res.json())
+          .then(results => {
+            if (results && !results.error) {
+              localStorage.setItem('votingResults', JSON.stringify(results));
+              router.push(`/results?session=${sessionId}`);
+            } else {
+              throw new Error(results.error || 'Failed to get results');
+            }
+          })
+          .catch(err => {
+            console.error('Error fetching results:', err);
+            setError('Failed to get results. Please try again.');
+          });
       }, 30000); // 30 second timeout
       setWaitingTimeout(timeout);
     }
@@ -189,8 +266,7 @@ export default function CardsPage() {
     socket.emit('vote', {
       sessionId,
       restaurantId: restaurant.id,
-      vote,
-      userId: socket.id
+      vote
     });
 
     // Move to next card
