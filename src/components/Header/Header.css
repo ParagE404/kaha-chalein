@@ -1,0 +1,53 @@
+.Header{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: var(--left-right-padding);
+    gap: var(--spacing-1);
+    position: relative;
+    height: auto;
+    min-height: 280px;
+}
+
+.Header .title{
+    font-family: var(--font-fam-1);
+    font-size: var(--font-size-12);
+    font-weight: 400;
+    color: var(--color-1);
+    line-height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--spacing-1);
+    z-index: 2;
+}
+
+.Header .logo{
+    width: 53px;
+    height: 53px;
+    object-fit: contain;
+    z-index: 2;
+}
+
+.Header .title-2{
+    font-family: var(--font-fam-2);
+    font-size: var(--font-size-9);
+    line-height: 100%;
+    font-weight: 600;
+    color: var(--color-1);
+    z-index: 2;
+}
+
+.Header .background{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}

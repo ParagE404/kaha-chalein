@@ -1,42 +1,102 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
   box-sizing: border-box;
-  padding: 0;
+}
+
+/* 2. Remove default margin */
+* {
   margin: 0;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
+/* 3. Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
   html {
-    color-scheme: dark;
+    interpolate-size: allow-keywords;
   }
 }
+
+body {
+  /* 4. Add accessible line-height */
+  line-height: 1.5;
+  /* 5. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 6. Improve media defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 7. Inherit fonts for form controls */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 8. Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* 9. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+/*
+  10. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
+
+
+/* End of css reset */
+
+:root {
+
+  --background: #ffffff;
+  --foreground: #000000;
+  --color-0: #ffffff;
+  --color-1: #000000;
+  --color-2: #E69CFF;
+
+  --font-fam-1: "MonteCarlo", serif;
+  --font-fam-2: "Montserrat", sans-serif;
+
+  --border-radius-1:4px;
+
+  --left-right-padding: 24px;
+
+  --spacing-1: 8px;  
+  --spacing-2: 16px;
+  --spacing-3: 24px;
+  --spacing-4: 32px;
+  --spacing-5: 40px;
+  --spacing-6: 48px;
+  --spacing-7: 56px;
+  --spacing-8: 80px;
+
+
+  --font-size-1: 12px;
+  --font-size-2: 14px;
+  --font-size-3: 16px;
+  --font-size-4: 18px;
+  --font-size-5: 20px;
+  --font-size-6: 24px;
+  --font-size-7: 32px;
+  --font-size-8: 40px;
+  --font-size-9: 48px;
+  --font-size-10: 56px;
+  --font-size-11: 64px;
+  --font-size-12: 72px;
+
+  --max-width: 500px;
+}
+
+

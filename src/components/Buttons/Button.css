@@ -1,0 +1,68 @@
+.custom-button {
+  padding: var(--spacing-1) var(--spacing-2);
+  border: none;
+  border-radius: var(--border-radius-1);
+  font-size: var(--font-size-3);
+  font-weight: 500;
+  font-family: var(--font-fam-2);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 48px; /* Minimum touch target size */
+  touch-action: manipulation; /* Optimizes for touch */
+  -webkit-tap-highlight-color: transparent; /* Removes tap highlight on iOS */
+  user-select: none; /* Prevents text selection */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Button types */
+.primary {
+  background-color: var(--color-2);
+  color: var(--color-0);
+  font-weight: 600;
+}
+
+.secondary {
+  background-color: var(--color-0);
+  color: var(--color-1);
+  border: 1px solid var(--color-1);
+}
+
+.outline {
+  background-color: transparent;
+  color: var(--color-2);
+  border: 1px solid var(--color-2);
+}
+
+.danger {
+  background-color: #ef4444;
+  color: var(--color-0);
+}
+
+/* Active states for mobile */
+.custom-button:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+/* Disabled state */
+.custom-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Full width option */
+.full-width {
+  width: 100%;
+  max-width: var(--max-width);
+}
+
+@media (hover: hover) {
+  /* Hover states only on devices that support hover */
+  .custom-button:hover:not(:disabled) {
+    filter: brightness(1.1);
+  }
+}
