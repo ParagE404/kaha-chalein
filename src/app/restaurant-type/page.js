@@ -3,20 +3,47 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../styles/restaurant-type.css';
+import TopBar from '@/components/TopBar/TopBar';
+import Footer from '@/components/Footer/Footer';
+import Button from '@/components/Buttons/Button';
 
 const restaurantTypes = [
-  { id: 'north-indian', name: 'North Indian', icon: '🍛' },
-  { id: 'south-indian', name: 'South Indian', icon: '🍚' },
-  { id: 'chinese', name: 'Chinese', icon: '🥢' },
-  { id: 'italian', name: 'Italian', icon: '🍝' },
-  { id: 'mexican', name: 'Mexican', icon: '🌮' },
-  { id: 'fast-food', name: 'Fast Food', icon: '🍔' },
-  { id: 'cafe', name: 'Café', icon: '☕' },
-  { id: 'street-food', name: 'Street Food', icon: '🍢' },
-  { id: 'seafood', name: 'Seafood', icon: '🦐' },
-  { id: 'desserts', name: 'Desserts', icon: '🍰' },
-  { id: 'beverages', name: 'Beverages', icon: '🥤' },
-  { id: 'continental', name: 'Continental', icon: '🍽️' }
+  { 
+    id: 'after-9-energy', 
+    name: 'After 9 Energy', 
+    icon: '🎵',
+    apiTypes: ['night_club', 'bar', 'restaurant']
+  },
+  { 
+    id: 'table-for-two', 
+    name: 'Table for Two', 
+    icon: '💕',
+    apiTypes: ['restaurant']
+  },
+  { 
+    id: 'sip-and-savor', 
+    name: 'Sip and Savor', 
+    icon: '🍷',
+    apiTypes: ['bar', 'liquor_store', 'wine_bar']
+  },
+  { 
+    id: 'fine-dine-finds', 
+    name: 'Fine Dine Finds', 
+    icon: '🍽️',
+    apiTypes: ['restaurant']
+  },
+  { 
+    id: 'mugs-and-mood', 
+    name: 'Mugs and Mood', 
+    icon: '☕',
+    apiTypes: ['cafe', 'coffee_shop']
+  },
+  { 
+    id: 'bake-me-happy', 
+    name: 'Bake Me Happy', 
+    icon: '🧁',
+    apiTypes: ['bakery', 'dessert_shop']
+  }
 ];
 
 export default function RestaurantType() {
@@ -33,17 +60,30 @@ export default function RestaurantType() {
   };
 
   const handleContinue = () => {
+    console.log(selectedTypes);
     if (selectedTypes.length > 0) {
+      // Get the selected restaurant type objects with their API types
+      const selectedTypeObjects = restaurantTypes.filter(type => 
+        selectedTypes.includes(type.id)
+      );
+      
+      // Extract all unique API types from selected restaurant types
+      const allApiTypes = selectedTypeObjects.flatMap(type => type.apiTypes);
+      const uniqueApiTypes = [...new Set(allApiTypes)];
+      
+      // Store both display info and API types
       localStorage.setItem('selectedTypes', JSON.stringify(selectedTypes));
+      localStorage.setItem('selectedTypeObjects', JSON.stringify(selectedTypeObjects));
+      localStorage.setItem('apiTypes', JSON.stringify(uniqueApiTypes));
+      
       router.push('/qr-code');
     }
   };
 
   return (
-    <div className="restaurant-type-container">
-      <h1>Select Restaurant Types</h1>
-      <p>Choose one or more types of restaurants you're interested in</p>
-      
+    <div className="restaurant-type-container restaurant-type container">
+      <TopBar/>
+
       <div className="type-grid">
         {restaurantTypes.map(type => (
           <div
@@ -56,14 +96,8 @@ export default function RestaurantType() {
           </div>
         ))}
       </div>
-
-      <button
-        className="continue-btn"
-        onClick={handleContinue}
-        disabled={selectedTypes.length === 0}
-      >
-        Continue
-      </button>
+      <Button className="continue-btn " type="primary"  onClick={handleContinue} disabled={selectedTypes.length === 0}>Continue</Button>
+      <Footer/>
     </div>
   );
 } 

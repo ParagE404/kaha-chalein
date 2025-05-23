@@ -5,6 +5,9 @@ import { useRouter } from 'next/navigation';
 import { QRCodeCanvas } from 'qrcode.react';
 import { io } from 'socket.io-client';
 import styles from '../styles/qr-code.module.css';
+import Button from '@/components/Buttons/Button';
+import TopBar from '@/components/TopBar/TopBar';
+import Footer from '@/components/Footer/Footer';
 
 export default function QRCodePage() {
   const router = useRouter();
@@ -151,13 +154,12 @@ export default function QRCodePage() {
   };
 
   return (
-    <div className={styles.container}>
-      <h1>Share QR Code</h1>
+    <div className={styles.container} style={!sessionId ? {justifyContent: 'center'} : {justifyContent: 'flex-start'}}>
+      <TopBar text="Share QR Code" style={!sessionId ? {marginTop: 'auto'} : {marginBottom: '0px'}}/>
       {error && <p className={styles.error}>{error}</p>}
       {!sessionId ? (
-        <button onClick={handleCreateSession} className={styles.createButton}>
-          Create Session
-        </button>
+ 
+        <Button className={styles.createButton} type="primary"  onClick={handleCreateSession}> Create QR</Button>
       ) : (
         <div className={styles.qrContainer}>
           <QRCodeCanvas
@@ -166,9 +168,9 @@ export default function QRCodePage() {
             level="H"
             includeMargin={true}
           />
-          <p>Scan this QR code to join the session</p>
+          <p>Share the QR code or link with everyone who is picking a place with you</p>
           <div className={styles.linkContainer}>
-            <p className={styles.linkLabel}>Or share this link:</p>
+            <p className={styles.linkLabel}>Click here to copy link:</p>
             <div className={styles.linkWrapper}>
               <input
                 type="text"
@@ -176,20 +178,17 @@ export default function QRCodePage() {
                 readOnly
                 className={styles.linkInput}
               />
-              <button onClick={copyToClipboard} className={styles.copyButton}>
-                Copy
-              </button>
+         
+              <Button className={styles.copyButton} type="tertiary"  onClick={copyToClipboard}> Copy</Button>
+              
             </div>
           </div>
-          <button
-            onClick={handleStartVoting}
-            className={styles.startButton}
-            disabled={isLoading}
-          >
-            {isLoading ? 'Loading...' : 'Start Voting'}
-          </button>
+  
+
+          <Button className={styles.startButton} type="tertiary"  onClick={handleStartVoting}> Start Voting</Button>
         </div>
       )}
+      <Footer/>
     </div>
   );
 } 

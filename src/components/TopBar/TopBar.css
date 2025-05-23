@@ -1,0 +1,19 @@
+.top-bar{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: var(--spacing-3);
+    padding-bottom: var(--spacing-3);
+    padding-left: var(--left-right-padding);
+    padding-right: var(--left-right-padding);
+    background-color: var(--color-0);
+}
+
+.top-bar .text{
+    font-family: var(--font-fam-1);
+    font-size: var(--font-size-8);
+    font-weight: 400;
+    line-height: 100%;
+    color: var(--color-1);
+}

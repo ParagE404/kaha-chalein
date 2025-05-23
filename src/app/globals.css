@@ -70,7 +70,8 @@ h1, h2, h3, h4, h5, h6 {
   --font-fam-1: "MonteCarlo", serif;
   --font-fam-2: "Montserrat", sans-serif;
 
-  --border-radius-1:4px;
+  --border-radius-1:5px;
+  --border-radius-2:10px;
 
   --left-right-padding: 24px;
 
