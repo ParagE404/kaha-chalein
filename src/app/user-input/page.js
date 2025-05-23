@@ -3,6 +3,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../styles/user-input.css';
+import Header from '@/components/Header/Header';
+import Footer from '@/components/Footer/Footer';
+import Button from '@/components/Buttons/Button';
 
 export default function UserInput() {
   const router = useRouter();
@@ -28,8 +31,10 @@ export default function UserInput() {
   };
 
   return (
-    <div className="user-input-container">
-      <h1>Tell us about yourself</h1>
+    <div className="user-input-container user-info container">
+      <Header/>
+      <div className="text-1">No more &quot;I&apos;m fine with anything&quot; lies..</div>
+
       <form onSubmit={handleSubmit} className="user-form">
         <div className="form-group">
           <label htmlFor="name">Name</label>
@@ -71,10 +76,12 @@ export default function UserInput() {
           />
         </div>
 
-        <button type="submit" className="submit-btn">
-          Continue
-        </button>
+
+        <Button className="continue-btn" type="tertiary"  onClick={() => handleSubmit}>Continue</Button>
+
       </form>
+
+      <Footer/>
     </div>
   );
 } 
