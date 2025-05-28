@@ -4,17 +4,21 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: 20px;
-  background-color: #f5f5f5;
+  background-color: var(--color-0);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  overflow: hidden;
 }
 
 .cardContainer {
   position: relative;
-  width: 100%;
+  width: 85%;
   max-width: 400px;
   height: 600px;
   margin-bottom: 20px;
   perspective: 1000px;
+  margin-top: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
 }
 
 .card {
@@ -22,7 +26,7 @@
   width: 100%;
   height: 100%;
   background: white;
-  border-radius: 20px;
+  border-radius: var(--border-radius-2);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   cursor: grab;
@@ -48,24 +52,38 @@
   height: 50%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0px
 }
 
 .cardContent h2 {
   margin: 0;
-  font-size: 24px;
-  color: #333;
+  font-size: var(--font-size-6);
+  font-family: var(--font-fam-2);
+  font-weight: 600;
+  color: var(--color-1);
+}
+
+.noMoreCardsTitle{
+  font-size: var(--font-size-6);
+  font-family: var(--font-fam-2);
+  font-weight: 600;
+  color: var(--color-1);
 }
 
 .cuisine {
-  color: #666;
-  font-size: 16px;
+  color: var(--color-1);
+  font-size: var(--font-size-3);
+  font-family: var(--font-fam-2);
+  font-weight: 400;
   margin: 0;
+  text-transform: capitalize;
 }
 
 .location {
-  color: #888;
-  font-size: 14px;
+  color: var(--color-1);
+  font-size: var(--font-size-3);
+  font-family: var(--font-fam-2);
+  font-weight: 400;
   margin: 0;
 }
 
@@ -78,18 +96,27 @@
 .rating {
   color: #f39c12;
   font-weight: 500;
+  font-family: var(--font-fam-2);
+  font-size: var(--font-size-3);
+  font-weight: 400;
 }
 
 .price {
-  color: #27ae60;
+  color: var(--color-2);
   font-weight: 500;
+  font-family: var(--font-fam-2);
+  font-size: var(--font-size-3);
+  font-weight: 400;
 }
 
 .address {
-  color: #666;
-  font-size: 14px;
+  color: var(--color-1);
+  font-size: var(--font-size-2);
+  font-family: var(--font-fam-2);
+  font-weight: 400;
   margin: 0;
   line-height: 1.4;
+  text-transform: capitalize;
 }
 
 .controls {
@@ -287,3 +314,26 @@
     padding: 4px 8px;
   }
 } 
+
+.resultsImage{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.loadingText{
+  width: 100%;
+  text-align: center;
+  font-size: var(--font-size-10);
+  font-family: var(--font-fam-1);
+  font-weight: 400;
+  color: var(--color-1);
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}

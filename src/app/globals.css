@@ -55,6 +55,10 @@ h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
+*:focus {
+  outline: none !important;
+  border-color: var(--color-2) !important;
+}
 
 /* End of css reset */
 

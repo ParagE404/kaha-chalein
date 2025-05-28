@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import styles from '../styles/results.module.css';
+import Image from 'next/image';
+import background from '@/assets/results/background.svg';
 
 export default function ResultsPage() {
   const searchParams = useSearchParams();
@@ -71,7 +73,7 @@ export default function ResultsPage() {
 
   return (
     <div className={styles.container}>
-      <h1>Voting Results</h1>
+      {/* <h1>Voting Results hehe</h1>
       <div className={styles.resultsList}>
         {results.map((restaurant, index) => (
           <div key={restaurant.id} className={styles.resultCard}>
@@ -104,7 +106,27 @@ export default function ResultsPage() {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
+        <div className={styles.locationText}>Location</div>
+        <div
+          className={styles.card}
+        >
+          <div 
+            className={styles.cardImage}
+            style={{ backgroundImage: `url(${results[0].image})` }}
+          />
+          <div className={styles.cardContent}>
+            <h2>{results[0].name}</h2>
+            <p className={styles.cuisine}>{results[0].cuisine}</p>
+            <p className={styles.location}>{results[0].location}</p>
+            <div className={styles.details}>
+              <span className={styles.rating}>⭐ {results[0].rating}</span>
+              <span className={styles.price}>{results[0].price}</span>
+            </div>
+            <p className={styles.address}>{results[0].address}</p>
+          </div>
+        </div>
+      <Image className={styles.resultsImage} src={background} alt="Results" width={100} height={100} />
     </div>
   );
 } 

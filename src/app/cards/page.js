@@ -4,6 +4,10 @@ import { useEffect, useState, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { io } from 'socket.io-client';
 import styles from '../styles/cards.module.css';
+import Header from '@/components/Header/Header';
+import Footer from '@/components/Footer/Footer';
+import Image from 'next/image';
+import background from '@/assets/cards/background.svg';
 
 export default function CardsPage() {
   const router = useRouter();
@@ -333,15 +337,15 @@ export default function CardsPage() {
     );
   }
 
-  if (currentIndex >= restaurants.length) {
+  if (currentIndex >= restaurants.length){
     const progressPercentage = votingProgress.totalUsers > 0 
       ? (votingProgress.votedUsers / votingProgress.totalUsers) * 100 
       : 0;
 
     return (
       <div className={styles.container}>
-        <div className={styles.noMoreCards}>
-          <h2>No more restaurants to vote on!</h2>
+        {/* <div className={styles.noMoreCards}>
+          <h2 className={styles.noMoreCardsTitle}>No more restaurants to vote on!</h2>
           {hasVoted ? (
             <>
               <p>Waiting for {remainingVotes} more {remainingVotes === 1 ? 'person' : 'people'} to finish voting...</p>
@@ -370,7 +374,9 @@ export default function CardsPage() {
           ) : (
             <p>Please vote on all restaurants to continue.</p>
           )}
-        </div>
+        </div> */}
+        <div className={styles.loadingText}>Loading Results</div>
+        <Image className={styles.resultsImage} src={background} alt="Results" width={100} height={100} />
       </div>
     );
   }
@@ -379,6 +385,7 @@ export default function CardsPage() {
 
   return (
     <div className={styles.container}>
+      <Header/>
       <div className={styles.cardContainer}>
         <div
           ref={cardRef}
@@ -408,7 +415,7 @@ export default function CardsPage() {
         </div>
       </div>
       
-      <div className={styles.controls}>
+      {/* <div className={styles.controls}>
         <button 
           className={`${styles.button} ${styles.reject}`}
           onClick={() => handleVote(false)}
@@ -421,7 +428,8 @@ export default function CardsPage() {
         >
           ✓
         </button>
-      </div>
+      </div> */}
+      <Footer/>
     </div>
   );
 } 

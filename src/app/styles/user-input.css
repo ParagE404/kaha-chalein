@@ -41,7 +41,7 @@
 
 .form-group label {
   display: block;
-  margin-bottom: var(--spacing-1);
+  margin-bottom: var(--spacing-2);
   color: var(--color-1);
   font-weight: 600;
   font-family: var(--font-fam-2);
@@ -50,7 +50,7 @@
 
 .form-group input {
   width: 100%;
-  padding: 12px 14px;
+  padding: var(--spacing-2);
   border:0px;
   border-radius: var(--border-radius-1);
   font-size: var(--font-size-2);

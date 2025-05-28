@@ -4,6 +4,9 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { io } from 'socket.io-client';
 import styles from '../styles/join.module.css';
+import Header from '@/components/Header/Header';
+import Footer from '@/components/Footer/Footer';
+import Button from '@/components/Buttons/Button';
 
 export default function JoinPage() {
   const router = useRouter();
@@ -145,8 +148,9 @@ export default function JoinPage() {
 
   return (
     <div className={styles.container}>
+      <Header/>
       <div className={styles.formContainer}>
-        <h1>Join Session</h1>
+        <h1>Join Session </h1>
         {error && <p className={styles.error}>{error}</p>}
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputGroup}>
@@ -163,15 +167,11 @@ export default function JoinPage() {
               autoComplete="off"
             />
           </div>
-          <button 
-            type="submit" 
-            className={styles.submitButton}
-            disabled={isJoining || !isConnected}
-          >
-            {isJoining ? 'Joining...' : 'Join Session'}
-          </button>
+  
+          <Button className={styles.submitButton} type="primary"  onClick={handleSubmit} disabled={isJoining || !isConnected}> Join Session</Button>
         </form>
       </div>
+      <Footer/>
     </div>
   );
 } 
