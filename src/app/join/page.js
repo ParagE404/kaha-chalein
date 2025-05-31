@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useState, useCallback, useRef, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { io } from 'socket.io-client';
 import styles from '../styles/join.module.css';
@@ -8,7 +8,7 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import Button from '@/components/Buttons/Button';
 
-export default function JoinPage() {
+function JoinPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session');
@@ -173,5 +173,25 @@ export default function JoinPage() {
       </div>
       <Footer/>
     </div>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <div className={styles.container}>
+      <Header/>
+      <div className={styles.formContainer}>
+        <h1>Loading...</h1>
+      </div>
+      <Footer/>
+    </div>
+  );
+}
+
+export default function JoinPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <JoinPageContent />
+    </Suspense>
   );
 } 
