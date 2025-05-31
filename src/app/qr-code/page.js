@@ -33,7 +33,7 @@ export default function QRCodePage() {
     newSocket.on('sessionCreated', ({ sessionId }) => {
       console.log('Session created:', sessionId);
       setSessionId(sessionId);
-      setJoinLink(`http://localhost:3000/join?session=${sessionId}`);
+      setJoinLink(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/join?session=${sessionId}`);
       
       // Store session data
       const sessionData = {
