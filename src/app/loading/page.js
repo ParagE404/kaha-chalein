@@ -9,7 +9,7 @@ export default function LoadingPage() {
   const router = useRouter();
 
   useEffect(() => {
-    const socket = io('http://localhost:3001');
+    const socket = io(process.env.NEXT_PUBLIC_BACKEND_URL);
     const sessionId = window.location.pathname.split('/').pop();
 
     socket.on('resultsReady', () => {

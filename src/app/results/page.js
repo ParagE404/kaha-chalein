@@ -39,7 +39,7 @@ export default function ResultsPage() {
       return;
     }
 
-    fetch(`http://localhost:3001/api/results?session=${sessionId}`)
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/results?session=${sessionId}`)
       .then(res => res.json())
       .then(data => {
         if (data.error) {

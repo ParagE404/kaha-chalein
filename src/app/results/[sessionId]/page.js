@@ -11,7 +11,7 @@ export default function ResultsPage({ params }) {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io('http://localhost:3001');
+    const newSocket = io(process.env.NEXT_PUBLIC_BACKEND_URL);
     setSocket(newSocket);
 
     newSocket.emit('getResults', { sessionId: params.sessionId });

@@ -40,7 +40,7 @@ export default function CardsPage() {
     const maxReconnectAttempts = 5;
 
     const connectSocket = () => {
-      socket = io('http://localhost:3001', {
+      socket = io(process.env.NEXT_PUBLIC_BACKEND_URL, {
         withCredentials: false,
         transports: ['websocket', 'polling'],
         reconnectionAttempts: maxReconnectAttempts,
@@ -188,7 +188,7 @@ export default function CardsPage() {
       const userData = JSON.parse(localStorage.getItem('userData') || '{}');
       const selectedTypes = JSON.parse(localStorage.getItem('selectedTypes') || '[]');
       
-      fetch('http://localhost:3001/api/restaurants', {
+      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -204,7 +204,7 @@ export default function CardsPage() {
           throw new Error(data.error || 'Failed to fetch restaurants');
         }
         // Set restaurants in the session
-        return fetch('http://localhost:3001/api/session/restaurants', {
+        return fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/session/restaurants`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -242,7 +242,7 @@ export default function CardsPage() {
       const timeout = setTimeout(() => {
         setError('Waiting too long for other users. Redirecting to results...');
         // Fetch results directly if timeout occurs
-        fetch(`http://localhost:3001/api/results?session=${sessionId}`)
+        fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/results?session=${sessionId}`)
           .then(res => res.json())
           .then(results => {
             if (results && !results.error) {

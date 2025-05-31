@@ -26,7 +26,7 @@ export default function JoinPage() {
       return;
     }
 
-    const newSocket = io('http://localhost:3001', {
+    const newSocket = io(process.env.NEXT_PUBLIC_BACKEND_URL, {
       transports: ['websocket'],
       reconnectionAttempts: 5,
       reconnectionDelay: 1000,

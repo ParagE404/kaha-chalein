@@ -18,7 +18,7 @@ export default function QRCodePage() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const newSocket = io('http://localhost:3001', {
+    const newSocket = io(process.env.NEXT_PUBLIC_BACKEND_URL, {
       transports: ['websocket'],
       reconnectionAttempts: 5,
       reconnectionDelay: 1000,
@@ -91,7 +91,7 @@ export default function QRCodePage() {
       
       // First, try to get restaurants from the server
       console.log('Fetching restaurants...');
-      const res = await fetch('http://localhost:3001/api/restaurants', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -115,7 +115,7 @@ export default function QRCodePage() {
       
       // Then, set restaurants in the session
       console.log('Setting restaurants in session...');
-      const setRes = await fetch('http://localhost:3001/api/session/restaurants', {
+      const setRes = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/session/restaurants`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
