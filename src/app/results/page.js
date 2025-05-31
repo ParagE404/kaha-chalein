@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import styles from '../styles/results.module.css';
 import Image from 'next/image';
 import background from '@/assets/results/background.svg';
 
-export default function ResultsPage() {
+function ResultsPageContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session');
   const [results, setResults] = useState([]);
@@ -128,5 +128,21 @@ export default function ResultsPage() {
         </div>
       <Image className={styles.resultsImage} src={background} alt="Results" width={100} height={100} />
     </div>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <div className={styles.container}>
+      <div className={styles.loading}>Loading...</div>
+    </div>
+  );
+}
+
+export default function ResultsPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <ResultsPageContent />
+    </Suspense>
   );
 } 
