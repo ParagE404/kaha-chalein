@@ -385,7 +385,7 @@ function CardsPageContent() {
 
   return (
     <div className={styles.container}>
-      <Header/>
+      {/* <Header/> */}
       <div className={styles.cardContainer}>
         <div
           ref={cardRef}
