@@ -9,6 +9,21 @@ A full-stack mobile-first web application that eliminates the "I'm fine with any
 ![Node.js](https://img.shields.io/badge/Node.js-Express-green?style=flat-square&logo=node.js)
 ![Socket.IO](https://img.shields.io/badge/Socket.IO-4.8.1-white?style=flat-square&logo=socket.io&logoColor=black)
 
+## 📸 App Screenshots
+
+<div align="center">
+  <img src="screenshots/welcome-screen.png" alt="Welcome Screen" width="250"/>
+  <img src="screenshots/restaurant-selection.png" alt="Restaurant Type Selection" width="250"/>
+  <img src="screenshots/qr-code-sharing.png" alt="QR Code Sharing" width="250"/>
+</div>
+
+<div align="center">
+  <img src="screenshots/card-voting.png" alt="Card Voting Interface" width="250"/>
+  <img src="screenshots/results-screen.png" alt="Results Screen" width="250"/>
+</div>
+
+*Mobile-first design with intuitive swipe gestures and real-time collaboration*
+
 ## 🚀 Key Features
 
 ### Real-Time Collaboration
