@@ -262,7 +262,7 @@ app.post('/api/restaurants', async (req, res) => {
           return null;
         }
         
-        // Generate image URL with cache-friendly parameters
+        // Generate image URL - client will handle failures gracefully
         let imageUrl = null;
         if (place.photos && place.photos[0]) {
           imageUrl = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0].photo_reference}&key=${GOOGLE_MAPS_API_KEY}`;

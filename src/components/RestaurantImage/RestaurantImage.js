@@ -3,49 +3,79 @@
 import { useState, useEffect } from "react";
 import styles from "./RestaurantImage.module.css";
 
+// Smart rate limiting - track Google API failures to avoid spam
+let googleImageFailures = 0;
+let lastGoogleFailure = 0;
+const GOOGLE_FAILURE_THRESHOLD = 3;
+const GOOGLE_FAILURE_RESET_TIME = 60000; // 60 seconds
+
 const RestaurantImage = ({ src, alt, restaurantName }) => {
   const [imageState, setImageState] = useState("loading");
   const [imageSrc, setImageSrc] = useState(src);
   const [retryCount, setRetryCount] = useState(0);
 
-  const maxRetries = 2;
-  const retryDelay = 1000; // 1 second
+  const maxRetries = 0; // No retries to avoid console spam
+  const imageTimeout = 4000; // 4 second timeout
 
   useEffect(() => {
-    if (!src) {
+    if (!src || !src.includes("http")) {
       setImageState("fallback");
       return;
+    }
+
+    // Check if we should skip Google images due to recent failures
+    const now = Date.now();
+    const isGoogleImage =
+      src.includes("googleapis.com") || src.includes("googleusercontent.com");
+
+    if (isGoogleImage) {
+      // Reset failure count after timeout
+      if (now - lastGoogleFailure > GOOGLE_FAILURE_RESET_TIME) {
+        googleImageFailures = 0;
+      }
+
+      // Skip if too many recent failures
+      if (googleImageFailures >= GOOGLE_FAILURE_THRESHOLD) {
+        setImageState("fallback");
+        return;
+      }
     }
 
     setImageSrc(src);
     setImageState("loading");
     setRetryCount(0);
+
+    // Set timeout to fallback if image takes too long
+    const timeout = setTimeout(() => {
+      setImageState("fallback");
+    }, imageTimeout);
+
+    return () => clearTimeout(timeout);
   }, [src]);
 
   const handleImageLoad = () => {
+    // Reset Google failure count on successful load
+    const isGoogleImage =
+      src &&
+      (src.includes("googleapis.com") || src.includes("googleusercontent.com"));
+    if (isGoogleImage) {
+      googleImageFailures = Math.max(0, googleImageFailures - 1);
+    }
     setImageState("loaded");
   };
 
   const handleImageError = () => {
-    console.log(
-      `Image failed to load: ${imageSrc}, retry count: ${retryCount}`
-    );
-
-    if (retryCount < maxRetries) {
-      // Retry loading the image after a delay
-      setTimeout(() => {
-        setRetryCount((prev) => prev + 1);
-        // Add a timestamp to bypass cache on retry
-        const separator = src.includes("?") ? "&" : "?";
-        setImageSrc(
-          `${src}${separator}retry=${retryCount + 1}&t=${Date.now()}`
-        );
-      }, retryDelay * (retryCount + 1)); // Exponential backoff
-    } else {
-      // Max retries reached, show fallback
-      console.log(`Max retries reached for image: ${src}, showing fallback`);
-      setImageState("fallback");
+    // Track Google API failures silently (no console logs)
+    const isGoogleImage =
+      src &&
+      (src.includes("googleapis.com") || src.includes("googleusercontent.com"));
+    if (isGoogleImage) {
+      googleImageFailures++;
+      lastGoogleFailure = Date.now();
     }
+
+    // Show fallback immediately - no retries to avoid console spam
+    setImageState("fallback");
   };
 
   const getFallbackGradient = (name) => {
