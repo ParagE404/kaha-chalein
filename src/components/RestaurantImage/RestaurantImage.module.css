@@ -1,0 +1,120 @@
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.restaurantImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.restaurantImage.loaded {
+  opacity: 1;
+}
+
+.loadingPlaceholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.fallbackImage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.fallbackImage::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.1));
+}
+
+.fallbackContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+  color: white;
+  text-align: center;
+  padding: var(--spacing-3);
+  z-index: 1;
+}
+
+.fallbackEmoji {
+  font-size: 3rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.fallbackText {
+  font-family: var(--font-fam-2);
+  font-size: var(--font-size-2);
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  max-width: 200px;
+  line-height: 1.3;
+  word-wrap: break-word;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .fallbackEmoji {
+    font-size: 2.5rem;
+  }
+  
+  .fallbackText {
+    font-size: var(--font-size-1);
+    max-width: 150px;
+  }
+  
+  .loadingSpinner {
+    width: 30px;
+    height: 30px;
+    border-width: 2px;
+  }
+}
+
+@media (max-width: 360px) {
+  .fallbackEmoji {
+    font-size: 2rem;
+  }
+  
+  .fallbackText {
+    font-size: var(--font-size-0);
+    max-width: 120px;
+  }
+}

@@ -42,6 +42,37 @@ io.engine.on("connection_error", (err) => {
 
 app.use(express.json());
 
+// Image proxy endpoint to help with rate limiting
+app.get('/api/image-proxy', async (req, res) => {
+  try {
+    const { url } = req.query;
+    
+    if (!url || !url.includes('googleapis.com')) {
+      return res.status(400).json({ error: 'Invalid image URL' });
+    }
+
+    // Set cache headers
+    res.set({
+      'Cache-Control': 'public, max-age=3600', // Cache for 1 hour
+      'Content-Type': 'image/jpeg'
+    });
+
+    // Fetch image from Google
+    const fetch = require('node-fetch');
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    // Pipe the image data to the response
+    response.body.pipe(res);
+  } catch (error) {
+    console.error('Image proxy error:', error);
+    res.status(500).json({ error: 'Failed to fetch image' });
+  }
+});
+
 // Helper function to generate session ID
 function generateSessionId() {
   return Math.random().toString(36).substring(2, 8);
@@ -231,12 +262,18 @@ app.post('/api/restaurants', async (req, res) => {
           return null;
         }
         
+        // Generate image URL with cache-friendly parameters
+        let imageUrl = null;
+        if (place.photos && place.photos[0]) {
+          imageUrl = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0].photo_reference}&key=${GOOGLE_MAPS_API_KEY}`;
+        }
+
         return {
           id: place.place_id,
           name: place.name,
           location: place.vicinity,
           cuisine: matchingTypes.join(', '),
-          image: place.photos ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0].photo_reference}&key=${GOOGLE_MAPS_API_KEY}` : null,
+          image: imageUrl,
           url: placeDetails.website || `https://www.google.com/maps/place/?q=place_id:${place.place_id}`,
           rating: place.rating || 0,
           price: '₹'.repeat(placeDetails.price_level || 1),

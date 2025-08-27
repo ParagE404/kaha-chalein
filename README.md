@@ -125,6 +125,13 @@ const calculateResults = (session) => {
 - Efficient state management with localStorage
 - Connection pooling and error recovery
 
+### Image Loading & Error Handling
+
+- **Smart image fallbacks** with retry logic and exponential backoff
+- **Rate limiting protection** for Google Places API image requests
+- **Beautiful gradient placeholders** when images fail to load
+- **Consistent visual experience** with restaurant-specific fallback designs
+
 ## 🚀 Getting Started
 
 ### Prerequisites

@@ -6,6 +6,7 @@ import { io } from 'socket.io-client';
 import styles from '../styles/cards.module.css';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
+import RestaurantImage from '@/components/RestaurantImage/RestaurantImage';
 import Image from 'next/image';
 import background from '@/assets/cards/background.svg';
 
@@ -421,20 +422,12 @@ function CardsPageContent() {
           tabIndex={0}
           aria-label={`Restaurant card for ${currentRestaurant.name}. Swipe left to pass, swipe right to like.`}
         >
-          <div 
-            className={styles.cardImage}
-            style={{ 
-              backgroundImage: currentRestaurant.image 
-                ? `url(${currentRestaurant.image})` 
-                : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-            }}
-          >
-            {!currentRestaurant.image && (
-              <div className={styles.noImagePlaceholder}>
-                <span>🍽️</span>
-                <span>No Image Available</span>
-              </div>
-            )}
+          <div className={styles.cardImage}>
+            <RestaurantImage 
+              src={currentRestaurant.image} 
+              alt={currentRestaurant.name}
+              restaurantName={currentRestaurant.name}
+            />
           </div>
           <div className={styles.cardContent}>
             <h2>{currentRestaurant.name}</h2>
