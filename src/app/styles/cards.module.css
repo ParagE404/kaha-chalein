@@ -3,42 +3,52 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100%;
-  max-height: 100%;
-  background-color: var(--color-0);
+  min-height: 100vh;
+  background: #e69cff21;
   max-width: var(--max-width);
   margin: 0 auto;
-  overflow: hidden;
+  padding: var(--spacing-2) 0px;
+  position: relative;
+  box-sizing: border-box;
 }
 
 .cardContainer {
   position: relative;
-  width: 80%;
-  max-width: 300px;
-  height: 500px;
-  max-height: 400px;
-  margin-bottom: 20px;
+  width: 90%;
+  max-width: 350px;
+  height: 600px;
+  max-height: 70vh;
   perspective: 1000px;
-  margin-top: var(--spacing-4);
-  margin-bottom: var(--spacing-4);
+  margin: var(--spacing-3) 0;
+  z-index: 1;
 }
 
 .card {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: white;
+  background: var(--color-0);
   border-radius: var(--border-radius-2);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   cursor: grab;
   user-select: none;
   will-change: transform;
-  transition: transform 0.3s ease-out;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .card:active {
   cursor: grabbing;
+  transform: scale(0.98);
+}
+
+@media (hover: hover) {
+  .card:hover {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2), 0 12px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
 }
 
 .cardImage {
@@ -47,25 +57,64 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  position: relative;
+}
+
+.cardImage::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.1));
+}
+
+.noImagePlaceholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+  color: var(--color-0);
+  font-family: var(--font-fam-2);
+  font-size: var(--font-size-2);
+  text-align: center;
+}
+
+.noImagePlaceholder span:first-child {
+  font-size: var(--font-size-8);
 }
 
 .cardContent {
-  padding: 20px;
+  padding: var(--spacing-3);
   height: 50%;
   display: flex;
   flex-direction: column;
-  gap: 0px
+  gap: var(--spacing-1);
+  justify-content: flex-start;
+  overflow: hidden;
 }
 
 .cardContent h2 {
-  margin: 0;
-  font-size: var(--font-size-6);
-  font-family: var(--font-fam-2);
+  margin: 0 0 var(--spacing-1) 0;
+  font-size: var(--font-size-4);
+  font-family: var(--font-fam-1);
   font-weight: 600;
   color: var(--color-1);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-wrap: break-word;
 }
 
-.noMoreCardsTitle{
+.noMoreCardsTitle {
   font-size: var(--font-size-6);
   font-family: var(--font-fam-2);
   font-weight: 600;
@@ -73,52 +122,81 @@
 }
 
 .cuisine {
-  color: var(--color-1);
-  font-size: var(--font-size-3);
+  color: var(--color-2);
+  font-size: var(--font-size-2);
   font-family: var(--font-fam-2);
-  font-weight: 400;
-  margin: 0;
+  font-weight: 500;
+  margin: 0 0 var(--spacing-1) 0;
   text-transform: capitalize;
+  opacity: 0.9;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .location {
   color: var(--color-1);
-  font-size: var(--font-size-3);
+  font-size: var(--font-size-1);
   font-family: var(--font-fam-2);
   font-weight: 400;
-  margin: 0;
+  margin: 0 0 var(--spacing-2) 0;
+  opacity: 0.7;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .details {
   display: flex;
-  gap: 15px;
-  margin: 10px 0;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin: 0 0 var(--spacing-2) 0;
+  padding: var(--spacing-1);
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: var(--border-radius-1);
+  flex-shrink: 0;
 }
 
 .rating {
   color: #f39c12;
-  font-weight: 500;
   font-family: var(--font-fam-2);
-  font-size: var(--font-size-3);
-  font-weight: 400;
+  font-size: var(--font-size-2);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  white-space: nowrap;
 }
 
 .price {
   color: var(--color-2);
-  font-weight: 500;
   font-family: var(--font-fam-2);
-  font-size: var(--font-size-3);
-  font-weight: 400;
+  font-size: var(--font-size-2);
+  font-weight: 600;
+  padding: 2px var(--spacing-1);
+  background: var(--color-3);
+  border-radius: var(--border-radius-1);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .address {
   color: var(--color-1);
-  font-size: var(--font-size-2);
+  font-size: var(--font-size-1);
   font-family: var(--font-fam-2);
   font-weight: 400;
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.3;
   text-transform: capitalize;
+  opacity: 0.8;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-wrap: break-word;
+  flex: 1;
 }
 
 .controls {
@@ -161,18 +239,39 @@
 }
 
 .loading {
-  font-size: 20px;
-  color: #666;
+  font-size: var(--font-size-5);
+  font-family: var(--font-fam-2);
+  color: var(--color-1);
   text-align: center;
+  padding: var(--spacing-4);
+  background: var(--color-0);
+  border-radius: var(--border-radius-2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 
 .error {
-  color: #ff6b6b;
+  color: #dc3545;
+  font-family: var(--font-fam-2);
+  font-size: var(--font-size-3);
   text-align: center;
-  padding: 20px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: var(--spacing-4);
+  background: var(--color-0);
+  border: 2px solid #dc3545;
+  border-radius: var(--border-radius-2);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.1);
+  max-width: 400px;
+  margin: var(--spacing-4);
 }
 
 .noMoreCards {
@@ -214,37 +313,233 @@
 @keyframes swipeRight {
   from {
     transform: translateX(0) rotate(0);
+    opacity: 1;
   }
   to {
     transform: translateX(200%) rotate(20deg);
+    opacity: 0;
   }
 }
 
 @keyframes swipeLeft {
   from {
     transform: translateX(0) rotate(0);
+    opacity: 1;
   }
   to {
     transform: translateX(-200%) rotate(-20deg);
+    opacity: 0;
   }
 }
 
 .swipeRight {
-  animation: swipeRight 0.3s ease-out forwards;
+  animation: swipeRight 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .swipeLeft {
-  animation: swipeLeft 0.3s ease-out forwards;
+  animation: swipeLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Swipe indicators */
+.card::before,
+.card::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.card::before {
+  content: "✓";
+  right: 20px;
+  background: rgba(81, 207, 102, 0.9);
+  color: white;
+}
+
+.card::after {
+  content: "✕";
+  left: 20px;
+  background: rgba(255, 107, 107, 0.9);
+  color: white;
+}
+
+/* Show indicators during swipe */
+.card[data-swipe="right"]::before {
+  opacity: 1;
+}
+
+.card[data-swipe="left"]::after {
+  opacity: 1;
+}
+
+/* Progress indicator */
+.progressContainer {
+  width: 90%;
+  max-width: 350px;
+  margin-bottom: var(--spacing-3);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.progressBar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--color-2);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  font-family: var(--font-fam-2);
+  font-size: var(--font-size-2);
+  color: var(--color-1);
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+/* Instructions */
+.instructions {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 350px;
+  margin-top: var(--spacing-3);
+  margin-bottom: var(--spacing-4);
+}
+
+.instructionItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-family: var(--font-fam-2);
+  font-size: var(--font-size-2);
+  color: var(--color-1);
+  opacity: 0.7;
+}
+
+.swipeIcon {
+  font-size: var(--font-size-4);
 }
 
 /* Responsive design */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+  .container {
+    padding: var(--spacing-2);
+  }
+
   .cardContainer {
-    height: 500px;
+    width: 95%;
+    max-width: 320px;
+    height: 550px;
+  }
+
+  .cardContent {
+    padding: var(--spacing-2);
+    gap: var(--spacing-1);
   }
 
   .cardContent h2 {
-    font-size: 20px;
+    font-size: var(--font-size-3);
+    margin-bottom: var(--spacing-1);
+  }
+
+  .cuisine {
+    font-size: var(--font-size-1);
+  }
+
+  .location {
+    font-size: var(--font-size-0);
+  }
+
+  .details {
+    padding: var(--spacing-1);
+    margin: var(--spacing-1) 0;
+  }
+
+  .rating {
+    font-size: var(--font-size-1);
+  }
+
+  .price {
+    font-size: var(--font-size-1);
+    padding: 1px var(--spacing-1);
+  }
+
+  .address {
+    font-size: var(--font-size-0);
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardContainer {
+    width: 100%;
+    height: 480px;
+    margin: var(--spacing-2) 0;
+  }
+
+  .cardContent {
+    padding: var(--spacing-2);
+    gap: 2px;
+  }
+
+  .cardContent h2 {
+    font-size: var(--font-size-3);
+    margin-bottom: 2px;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+  }
+
+  .cuisine {
+    font-size: var(--font-size-0);
+    margin-bottom: 2px;
+  }
+
+  .location {
+    font-size: 10px;
+    margin-bottom: var(--spacing-1);
+  }
+
+  .details {
+    padding: 2px var(--spacing-1);
+    margin: 2px 0;
+    gap: var(--spacing-1);
+  }
+
+  .rating {
+    font-size: var(--font-size-0);
+  }
+
+  .price {
+    font-size: var(--font-size-0);
+    padding: 1px 4px;
+  }
+
+  .address {
+    font-size: 10px;
+    line-height: 1.2;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 
   .button {
@@ -254,7 +549,71 @@
   }
 
   .noMoreCards {
-    padding: 20px;
+    padding: var(--spacing-3);
+    margin: var(--spacing-2);
+  }
+
+  .loadingText {
+    font-size: var(--font-size-6);
+  }
+
+  .progressContainer {
+    width: 95%;
+  }
+
+  .instructions {
+    width: 95%;
+    margin-top: var(--spacing-2);
+  }
+
+  .instructionItem {
+    font-size: var(--font-size-1);
+  }
+
+  .swipeIcon {
+    font-size: var(--font-size-3);
+  }
+}
+
+@media (max-width: 360px) {
+  .cardContainer {
+    height: 450px;
+    max-height: 65vh;
+  }
+
+  .cardContent {
+    padding: var(--spacing-1);
+    gap: 1px;
+  }
+
+  .cardContent h2 {
+    font-size: var(--font-size-2);
+    margin-bottom: 1px;
+  }
+
+  .cuisine {
+    font-size: 11px;
+    margin-bottom: 1px;
+  }
+
+  .location {
+    font-size: 9px;
+    margin-bottom: 2px;
+  }
+
+  .details {
+    padding: 1px 2px;
+    margin: 1px 0;
+  }
+
+  .rating,
+  .price {
+    font-size: 10px;
+  }
+
+  .address {
+    font-size: 9px;
+    line-height: 1.1;
   }
 }
 
@@ -315,21 +674,23 @@
     font-size: 12px;
     padding: 4px 8px;
   }
-} 
+}
 
-.resultsImage{
+.resultsImage {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0.3;
+  z-index: 1;
 }
 
-.loadingText{
+.loadingText {
   width: 100%;
   text-align: center;
-  font-size: var(--font-size-10);
+  font-size: var(--font-size-8);
   font-family: var(--font-fam-1);
   font-weight: 400;
   color: var(--color-1);
@@ -338,4 +699,15 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 9999;
+  animation: fadeInOut 2s infinite;
+}
+
+@keyframes fadeInOut {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
 }

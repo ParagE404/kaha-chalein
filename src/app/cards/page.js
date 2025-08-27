@@ -50,7 +50,6 @@ function CardsPageContent() {
       });
 
       socket.on('connect', () => {
-        console.log('Socket connected:', socket.id);
         reconnectAttempts = 0;
         
         // Get user data from localStorage
@@ -75,7 +74,6 @@ function CardsPageContent() {
       });
 
       socket.on('connect_error', (error) => {
-        console.error('Socket connection error:', error);
         reconnectAttempts++;
         
         if (reconnectAttempts >= maxReconnectAttempts) {
@@ -265,7 +263,6 @@ function CardsPageContent() {
     if (!socket || currentIndex >= restaurants.length) return;
 
     const restaurant = restaurants[currentIndex];
-    console.log('Submitting vote:', { restaurantId: restaurant.id, vote });
     
     socket.emit('vote', {
       sessionId,
@@ -278,7 +275,6 @@ function CardsPageContent() {
 
     // If this was the last card, mark as voted
     if (currentIndex === restaurants.length - 1) {
-      console.log('All cards voted on');
       setHasVoted(true);
     }
   };
@@ -301,6 +297,17 @@ function CardsPageContent() {
     
     if (cardRef.current) {
       cardRef.current.style.transform = `translateX(${deltaX}px) rotate(${deltaX * 0.1}deg)`;
+      
+      // Show swipe indicators
+      if (Math.abs(deltaX) > 50) {
+        if (deltaX > 0) {
+          cardRef.current.setAttribute('data-swipe', 'right');
+        } else {
+          cardRef.current.setAttribute('data-swipe', 'left');
+        }
+      } else {
+        cardRef.current.removeAttribute('data-swipe');
+      }
     }
   };
 
@@ -311,7 +318,8 @@ function CardsPageContent() {
     const deltaX = currentX.current - startX.current;
     
     if (cardRef.current) {
-      cardRef.current.style.transition = 'transform 0.3s ease-out';
+      cardRef.current.removeAttribute('data-swipe');
+      cardRef.current.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
       cardRef.current.style.transform = '';
     }
 
@@ -385,7 +393,19 @@ function CardsPageContent() {
 
   return (
     <div className={styles.container}>
-      {/* <Header/> */}
+      {/* Progress indicator */}
+      <div className={styles.progressContainer}>
+        <div className={styles.progressBar}>
+          <div 
+            className={styles.progressFill}
+            style={{ width: `${((currentIndex + 1) / restaurants.length) * 100}%` }}
+          />
+        </div>
+        <span className={styles.progressText}>
+          {currentIndex + 1} of {restaurants.length}
+        </span>
+      </div>
+
       <div className={styles.cardContainer}>
         <div
           ref={cardRef}
@@ -397,11 +417,25 @@ function CardsPageContent() {
           onMouseMove={(e) => handleMove(e.clientX)}
           onMouseUp={handleEnd}
           onMouseLeave={handleEnd}
+          role="button"
+          tabIndex={0}
+          aria-label={`Restaurant card for ${currentRestaurant.name}. Swipe left to pass, swipe right to like.`}
         >
           <div 
             className={styles.cardImage}
-            style={{ backgroundImage: `url(${currentRestaurant.image})` }}
-          />
+            style={{ 
+              backgroundImage: currentRestaurant.image 
+                ? `url(${currentRestaurant.image})` 
+                : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+            }}
+          >
+            {!currentRestaurant.image && (
+              <div className={styles.noImagePlaceholder}>
+                <span>🍽️</span>
+                <span>No Image Available</span>
+              </div>
+            )}
+          </div>
           <div className={styles.cardContent}>
             <h2>{currentRestaurant.name}</h2>
             <p className={styles.cuisine}>{currentRestaurant.cuisine}</p>
@@ -415,20 +449,18 @@ function CardsPageContent() {
         </div>
       </div>
       
-      {/* <div className={styles.controls}>
-        <button 
-          className={`${styles.button} ${styles.reject}`}
-          onClick={() => handleVote(false)}
-        >
-          ✕
-        </button>
-        <button 
-          className={`${styles.button} ${styles.accept}`}
-          onClick={() => handleVote(true)}
-        >
-          ✓
-        </button>
-      </div> */}
+      {/* Swipe instructions */}
+      <div className={styles.instructions}>
+        <div className={styles.instructionItem}>
+          <span className={styles.swipeIcon}>👈</span>
+          <span>Swipe left to pass</span>
+        </div>
+        <div className={styles.instructionItem}>
+          <span className={styles.swipeIcon}>👉</span>
+          <span>Swipe right to like</span>
+        </div>
+      </div>
+
       <Footer/>
     </div>
   );
