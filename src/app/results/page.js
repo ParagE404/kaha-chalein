@@ -71,61 +71,70 @@ function ResultsPageContent() {
     );
   }
 
+  if (!results || results.length === 0) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.error}>No results available</div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.container}>
-      {/* <h1>Voting Results hehe</h1>
-      <div className={styles.resultsList}>
-        {results.map((restaurant, index) => (
-          <div key={restaurant.id} className={styles.resultCard}>
-            <div className={styles.rank}>#{index + 1}</div>
-            <div 
-              className={styles.restaurantImage}
-              style={{ backgroundImage: `url(${restaurant.image})` }}
-            />
-            <div className={styles.restaurantInfo}>
-              <h2>{restaurant.name}</h2>
-              <p className={styles.cuisine}>{restaurant.cuisine}</p>
-              <p className={styles.location}>{restaurant.location}</p>
-              <div className={styles.details}>
-                <span className={styles.rating}>⭐ {restaurant.rating}</span>
-                <span className={styles.price}>{restaurant.price}</span>
-              </div>
-              <div className={styles.votes}>
-                <span className={styles.likes}>👍 {restaurant.votes.likes}</span>
-                <span className={styles.dislikes}>👎 {restaurant.votes.dislikes}</span>
-                <span className={styles.score}>Score: {restaurant.score}</span>
-              </div>
-              <a 
-                href={restaurant.url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className={styles.viewButton}
+      <div className={styles.locationText}>Results</div>
+      <div className={styles.resultsContainer}>
+        <div className={styles.resultsList}>
+          {results.map((restaurant, index) => (
+            <div key={restaurant.id} className={styles.resultCard}>
+              <div className={styles.rank}>#{index + 1}</div>
+              <div 
+                className={styles.restaurantImage}
+                style={{ 
+                  backgroundImage: restaurant.image ? `url(${restaurant.image})` : 'none'
+                }}
+                onError={(e) => {
+                  e.target.style.backgroundImage = 'none';
+                }}
               >
-                View Details
-              </a>
+                {!restaurant.image && (
+                  <div style={{ fontSize: '24px' }}>🍽️</div>
+                )}
+              </div>
+              <div className={styles.restaurantInfo}>
+                <h2>{restaurant.name}</h2>
+                <p className={styles.cuisine}>{restaurant.cuisine}</p>
+                <p className={styles.location}>{restaurant.location}</p>
+                <div className={styles.details}>
+                  <span className={styles.rating}>⭐ {restaurant.rating}</span>
+                  <span className={styles.price}>{restaurant.price}</span>
+                </div>
+                <p className={styles.address}>{restaurant.address}</p>
+              </div>
+              <div className={styles.voteInfo}>
+                <div className={styles.voteCount}>
+                  <span className={styles.likes}>👍 {restaurant.votes?.likes || 0}</span>
+                  <span className={styles.dislikes}>👎 {restaurant.votes?.dislikes || 0}</span>
+                </div>
+                <div className={styles.score}>Score: {restaurant.score || 0}</div>
+                <a 
+                  href={restaurant.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className={styles.viewButton}
+                >
+                  View Details
+                </a>
+              </div>
             </div>
-          </div>
-        ))}
-      </div> */}
-        <div className={styles.locationText}>Location</div>
-        <div
-          className={styles.card}
-        >
-          <div 
-            className={styles.cardImage}
-            style={{ backgroundImage: `url(${results[0].image})` }}
-          />
-          <div className={styles.cardContent}>
-            <h2>{results[0].name}</h2>
-            <p className={styles.cuisine}>{results[0].cuisine}</p>
-            <p className={styles.location}>{results[0].location}</p>
-            <div className={styles.details}>
-              <span className={styles.rating}>⭐ {results[0].rating}</span>
-              <span className={styles.price}>{results[0].price}</span>
-            </div>
-            <p className={styles.address}>{results[0].address}</p>
-          </div>
+          ))}
         </div>
+        <button 
+          className={styles.newSessionButton}
+          onClick={() => window.location.href = '/'}
+        >
+          Start New Session
+        </button>
+      </div>
       <Image className={styles.resultsImage} src={background} alt="Results" width={100} height={100} />
     </div>
   );

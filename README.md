@@ -17,29 +17,33 @@ A full-stack mobile-first web application that eliminates the "I'm fine with any
   <img src="screenshots/card-voting.png" alt="Card Voting Interface" width="250"/>
 </div>
 
-*Mobile-first design with intuitive swipe gestures and real-time collaboration*
+_Mobile-first design with intuitive swipe gestures and real-time collaboration_
 
 ## 🚀 Key Features
 
 ### Real-Time Collaboration
+
 - **WebSocket-powered sessions** with automatic reconnection and error handling
 - **Live voting progress tracking** with user status updates
 - **Session management** with automatic cleanup and timeout handling
 - **Multi-user synchronization** supporting up to 10 participants per session
 
 ### Advanced Location Services
+
 - **Precise GPS integration** with multiple geocoding fallbacks
 - **Google Maps Places API** integration for real restaurant data
 - **Intelligent location parsing** with detailed address resolution
 - **Dynamic restaurant filtering** based on location and preferences
 
 ### Intuitive User Experience
+
 - **Tinder-style card interface** with touch/mouse gesture support
 - **QR code session sharing** for seamless group joining
 - **Progressive Web App** optimized for mobile devices
 - **Responsive design** with custom CSS modules and components
 
 ### Smart Matching Algorithm
+
 - **Preference-based scoring** system for group consensus
 - **Real-time vote aggregation** with like/dislike tracking
 - **Intelligent result calculation** considering all group members
@@ -48,6 +52,7 @@ A full-stack mobile-first web application that eliminates the "I'm fine with any
 ## 🏗️ Technical Architecture
 
 ### Frontend (Next.js 15 + React 19)
+
 ```
 src/
 ├── app/                    # App Router pages
@@ -66,6 +71,7 @@ src/
 ```
 
 ### Backend (Node.js + Express + Socket.IO)
+
 ```
 server/src/
 └── index.js              # Main server with:
@@ -77,6 +83,7 @@ server/src/
 ```
 
 ### Core Technologies & APIs
+
 - **Google Maps Places API** - Real restaurant data with photos, ratings, and details
 - **Google Geocoding API** - Location services and address resolution
 - **Socket.IO** - Real-time bidirectional communication
@@ -86,18 +93,21 @@ server/src/
 ## 🛠️ Advanced Implementation Details
 
 ### Real-Time Session Management
+
 - Custom session lifecycle with automatic cleanup
 - User connection state tracking with reconnection logic
 - Vote synchronization across multiple clients
 - Session timeout and inactivity handling
 
 ### Location Intelligence
+
 - Multi-tier geocoding with fallback strategies
 - Precise GPS coordinate handling
 - Address parsing with road-level accuracy
 - Location-based restaurant filtering
 
 ### Voting Algorithm
+
 ```javascript
 // Sophisticated scoring system
 const calculateResults = (session) => {
@@ -109,6 +119,7 @@ const calculateResults = (session) => {
 ```
 
 ### Performance Optimizations
+
 - Lazy loading with React Suspense
 - Optimized bundle splitting with Next.js
 - Efficient state management with localStorage
@@ -117,12 +128,14 @@ const calculateResults = (session) => {
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - Google Maps API key with Places and Geocoding APIs enabled
 
 ### Installation & Setup
 
 1. **Clone and install dependencies:**
+
 ```bash
 git clone https://github.com/yourusername/kaha-chalein.git
 cd kaha-chalein
@@ -131,6 +144,7 @@ cd server && npm install
 ```
 
 2. **Configure environment variables:**
+
 ```bash
 # Frontend (.env.local)
 NEXT_PUBLIC_BACKEND_URL=http://localhost:3001
@@ -142,11 +156,12 @@ PORT=3001
 ```
 
 3. **Start development servers:**
+
 ```bash
 # Terminal 1 - Frontend
 npm run dev
 
-# Terminal 2 - Backend  
+# Terminal 2 - Backend
 cd server && npm run dev
 ```
 
@@ -163,7 +178,6 @@ cd server && npm run dev
 5. **Real-time Voting** - Swipe through restaurant cards with live progress
 6. **Results & Action** - View matched restaurant with direct booking links
 
-
 ## 🔧 Development Scripts
 
 ```bash
@@ -172,6 +186,5 @@ npm run build        # Production build with optimizations
 npm run start        # Start production server
 npm run lint         # ESLint code quality checks
 ```
-
 
 ---
