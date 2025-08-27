@@ -39,12 +39,12 @@
 
 .resultsContainer {
   width: 90%;
-  max-width: 800px;
+  max-width: var(--max-width);
   height: calc(100vh - 140px);
   margin-top: 120px;
-  padding: 20px;
+  padding: var(--spacing-3);
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
+  border-radius: var(--border-radius-2);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   z-index: 1000;
@@ -99,10 +99,10 @@
 .resultCard {
   display: flex;
   align-items: center;
-  padding: 15px;
-  background: #f8f9fa;
-  border-radius: 15px;
-  gap: 15px;
+  padding: var(--spacing-2);
+  background: var(--color-3);
+  border-radius: var(--border-radius-2);
+  gap: var(--spacing-2);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   flex-shrink: 0;
   animation: slideInUp 0.3s ease-out forwards;
@@ -139,12 +139,14 @@
 }
 
 .rank {
-  font-size: 20px;
-  font-weight: bold;
-  color: #666;
+  font-size: var(--font-size-4);
+  font-weight: 600;
+  font-family: var(--font-fam-2);
+  color: var(--color-1);
   min-width: 35px;
   text-align: center;
-  background: #e9ecef;
+  background: var(--color-2);
+  color: var(--color-0);
   border-radius: 50%;
   width: 35px;
   height: 35px;
@@ -159,15 +161,17 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 10px;
+  border-radius: var(--border-radius-2);
   flex-shrink: 0;
-  background-color: #e9ecef;
+  background-color: var(--color-3);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #666;
-  font-size: 12px;
+  color: var(--color-1);
+  font-size: var(--font-size-1);
+  font-family: var(--font-fam-2);
   text-align: center;
+  opacity: 0.6;
 }
 
 .restaurantInfo {
@@ -176,15 +180,18 @@
 
 .restaurantInfo h2 {
   margin: 0 0 5px 0;
-  color: #333;
-  font-size: 18px;
+  color: var(--color-1);
+  font-size: var(--font-size-4);
   font-weight: 600;
+  font-family: var(--font-fam-2);
 }
 
 .cuisine {
-  color: #666;
+  color: var(--color-1);
   margin: 0 0 3px 0;
-  font-size: 14px;
+  font-size: var(--font-size-2);
+  font-family: var(--font-fam-2);
+  opacity: 0.7;
 }
 
 .details {
@@ -196,20 +203,24 @@
 .rating {
   color: #f39c12;
   font-weight: 500;
-  font-size: 14px;
+  font-size: var(--font-size-2);
+  font-family: var(--font-fam-2);
 }
 
 .price {
   color: #27ae60;
   font-weight: 500;
-  font-size: 14px;
+  font-size: var(--font-size-2);
+  font-family: var(--font-fam-2);
 }
 
 .address {
-  color: #666;
-  font-size: 12px;
+  color: var(--color-1);
+  font-size: var(--font-size-1);
+  font-family: var(--font-fam-2);
   margin: 5px 0 0 0;
   line-height: 1.3;
+  opacity: 0.6;
 }
 
 .voteInfo {
@@ -227,70 +238,113 @@
 .likes {
   color: #27ae60;
   font-weight: 500;
+  font-family: var(--font-fam-2);
+  font-size: var(--font-size-2);
 }
 
 .dislikes {
   color: #e74c3c;
   font-weight: 500;
+  font-family: var(--font-fam-2);
+  font-size: var(--font-size-2);
 }
 
 .score {
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
+  font-size: var(--font-size-3);
+  font-weight: 600;
+  font-family: var(--font-fam-2);
+  color: var(--color-1);
   margin-top: 5px;
 }
 
 .viewButton {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 8px 16px;
-  background-color: #3498db;
-  color: white;
+  background-color: var(--color-2);
+  color: var(--color-0);
   text-decoration: none;
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: var(--border-radius-1);
+  font-size: var(--font-size-2);
   font-weight: 500;
+  font-family: var(--font-fam-2);
   margin-top: 8px;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
+  min-height: 36px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
-.viewButton:hover {
-  background-color: #2980b9;
+.viewButton:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+@media (hover: hover) {
+  .viewButton:hover {
+    filter: brightness(1.1);
+  }
 }
 
 .newSessionButton {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   max-width: 300px;
   margin: 0 auto;
-  padding: 15px 30px;
-  background-color: #3498db;
-  color: white;
+  padding: 12px 24px;
+  background-color: var(--color-2);
+  color: var(--color-0);
   border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: 500;
+  border-radius: var(--border-radius-1);
+  font-size: var(--font-size-3);
+  font-weight: 600;
+  font-family: var(--font-fam-2);
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
   flex-shrink: 0;
+  min-height: 48px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
-.newSessionButton:hover {
-  background-color: #2980b9;
+.newSessionButton:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+.newSessionButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (hover: hover) {
+  .newSessionButton:hover:not(:disabled) {
+    filter: brightness(1.1);
+  }
 }
 
 .loading {
-  font-size: 20px;
-  color: #666;
+  font-size: var(--font-size-5);
+  font-family: var(--font-fam-2);
+  color: var(--color-1);
   text-align: center;
+  opacity: 0.7;
 }
 
 .error {
   color: #e74c3c;
+  font-family: var(--font-fam-2);
+  font-size: var(--font-size-3);
   text-align: center;
-  padding: 20px;
-  background: white;
-  border-radius: 10px;
+  padding: var(--spacing-3);
+  background: var(--color-0);
+  border-radius: var(--border-radius-2);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -335,7 +389,7 @@
   }
 
   .locationText {
-    font-size: 24px;
+    font-size: var(--font-size-7);
     top: 40px;
   }
 
