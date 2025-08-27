@@ -27,6 +27,11 @@ const montserrat = Montserrat({
 export const metadata = {
   title: "Kaha Chalein?",
   description: "Let's decide where to eat together!",
+  icons: {
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
 };
 
 export default function RootLayout({ children }) {

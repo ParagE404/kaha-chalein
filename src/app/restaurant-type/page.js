@@ -12,13 +12,13 @@ const restaurantTypes = [
     id: 'after-9-energy', 
     name: 'After 9 Energy', 
     icon: '🎵',
-    apiTypes: ['night_club', 'bar', 'restaurant']
+    apiTypes: ['night_club', 'bar', 'pub']
   },
   { 
     id: 'table-for-two', 
     name: 'Table for Two', 
     icon: '💕',
-    apiTypes: ['restaurant']
+    apiTypes: ['restaurant','cafe']
   },
   { 
     id: 'sip-and-savor', 
