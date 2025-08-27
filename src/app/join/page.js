@@ -168,7 +168,14 @@ function JoinPageContent() {
             />
           </div>
   
-          <Button className={styles.submitButton} type="primary"  onClick={handleSubmit} disabled={isJoining || !isConnected}> Join Session</Button>
+          <Button 
+            className={styles.submitButton} 
+            type="primary" 
+            onClick={handleSubmit} 
+            disabled={isJoining || !isConnected}
+          >
+            {isJoining ? 'Joining...' : 'Join Session'}
+          </Button>
         </form>
       </div>
       <Footer/>

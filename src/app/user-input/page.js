@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from '../styles/user-input.css';
+import '../styles/user-input.css';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import Button from '@/components/Buttons/Button';
@@ -51,7 +51,6 @@ export default function UserInput() {
           
           if (response.ok) {
             const data = await response.json();
-            console.log('Location data:', data); // For debugging
             
             // Build a very detailed location string
             const locationParts = [];
@@ -142,7 +141,7 @@ export default function UserInput() {
               
               if (nominatimResponse.ok) {
                 const nominatimData = await nominatimResponse.json();
-                console.log('Nominatim data:', nominatimData);
+    
                 
                 const address = nominatimData.address || {};
                 const addressParts = [];
@@ -265,13 +264,14 @@ export default function UserInput() {
               onClick={getCurrentLocation}
               disabled={isGettingLocation}
               className="location-btn"
+              aria-label="Use current location"
             >
               {isGettingLocation ? '📍...' : '📍'}
             </button>
           </div>
         </div>
 
-        <Button className="continue-btn" type="tertiary"  onClick={() => handleSubmit}>Continue</Button>
+        <Button className="continue-btn" type="primary" onClick={handleSubmit}>Continue</Button>
 
       </form>
 

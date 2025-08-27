@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from '../styles/restaurant-type.css';
+import '../styles/restaurant-type.css';
 import TopBar from '@/components/TopBar/TopBar';
 import Footer from '@/components/Footer/Footer';
 import Button from '@/components/Buttons/Button';
@@ -60,7 +60,6 @@ export default function RestaurantType() {
   };
 
   const handleContinue = () => {
-    console.log(selectedTypes);
     if (selectedTypes.length > 0) {
       // Get the selected restaurant type objects with their API types
       const selectedTypeObjects = restaurantTypes.filter(type => 

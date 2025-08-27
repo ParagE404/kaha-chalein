@@ -91,27 +91,58 @@
   color: var(--color-2);
   border: none;
   border-radius: var(--border-radius-1);
-  padding: 10px 12px;
-  font-size: 16px;
+  padding: var(--spacing-2);
+  font-size: var(--font-size-3);
+  font-family: var(--font-fam-2);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 40px;
-  height: 40px;
+  min-width: 48px;
+  height: 48px;
   transition: all 0.2s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 
 .location-btn:disabled {
-  opacity: 0.7;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
+.location-btn:active {
+  transform: scale(0.95);
+}
+
+@media (hover: hover) {
+  .location-btn:hover:not(:disabled) {
+    background: var(--color-2);
+    color: var(--color-0);
+  }
+}
+
 .user-info .continue-btn{
-  margin: 0px auto;
+  margin: var(--spacing-3) auto;
+  width: 100%;
+  max-width: 300px;
 }
 
 .Footer{
   margin-top: auto;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .user-form {
+    padding: var(--spacing-2);
+  }
+  
+  .form-group input {
+    font-size: var(--font-size-3);
+  }
+  
+  .location-input-group {
+    gap: var(--spacing-2);
+  }
 }

@@ -179,13 +179,15 @@ export default function QRCodePage() {
                 className={styles.linkInput}
               />
          
-              <Button className={styles.copyButton} type="tertiary"  onClick={copyToClipboard}> Copy</Button>
+              <Button className={styles.copyButton} type="secondary" onClick={copyToClipboard}>Copy</Button>
               
             </div>
           </div>
   
 
-          <Button className={styles.startButton} type="tertiary"  onClick={handleStartVoting}> Start Voting</Button>
+          <Button className={styles.startButton} type="primary" onClick={handleStartVoting} disabled={isLoading}>
+            {isLoading ? 'Loading...' : 'Start Voting'}
+          </Button>
         </div>
       )}
       <Footer/>

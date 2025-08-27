@@ -63,12 +63,14 @@ export default function ResultsPage({ params }) {
         <button 
           className="view-details-btn"
           onClick={() => window.open(result.url, '_blank')}
+          aria-label={`View details for ${result.name}`}
         >
           View Details
         </button>
         <button 
           className="new-session-btn"
           onClick={handleNewSession}
+          aria-label="Start a new voting session"
         >
           Start New Session
         </button>

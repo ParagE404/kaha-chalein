@@ -56,16 +56,16 @@
 }
 
 .copyButton {
-  padding: 0.5rem 1rem;
-  color: var(--color-1);
-  border: none;
-  border-radius: var(--border-radius-1);
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  background-color: var(--color-0);
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .startButton {
-  margin: 0 auto;
+  margin: var(--spacing-3) auto 0;
+  width: 100%;
+  max-width: 300px;
+}
+
+.createButton {
+  margin: var(--spacing-4) auto;
 }

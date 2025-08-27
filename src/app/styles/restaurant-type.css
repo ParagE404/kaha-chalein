@@ -18,14 +18,14 @@
   padding: var(--spacing-3);
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 1rem;
+  gap: var(--spacing-3);
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-4);
 }
 
 .type-card {
-  background: white;
-  padding: 1rem;
+  background: var(--color-0);
+  padding: var(--spacing-3);
   border-radius: var(--border-radius-2);
   border: 2px solid var(--color-0);
   display: flex;
@@ -34,6 +34,8 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-height: 120px;
+  justify-content: center;
 }
 
 .type-card:hover {
@@ -46,20 +48,24 @@
 }
 
 .type-icon {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  font-size: var(--font-size-8);
+  margin-bottom: var(--spacing-2);
 }
 
 .type-name {
-  font-size: 0.9rem;
+  font-size: var(--font-size-2);
+  font-family: var(--font-fam-2);
+  font-weight: 500;
   text-align: center;
+  color: var(--color-1);
 }
 
 .continue-btn {
-
+  margin: var(--spacing-3) auto;
 }
 
 .continue-btn:disabled {
-  background-color: #ccc !important;
+  opacity: 0.5 !important;
   cursor: not-allowed !important;
+  transform: none !important;
 } 

@@ -131,6 +131,7 @@ function ResultsPageContent() {
         <button 
           className={styles.newSessionButton}
           onClick={() => window.location.href = '/'}
+          aria-label="Start a new voting session"
         >
           Start New Session
         </button>

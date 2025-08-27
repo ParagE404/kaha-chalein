@@ -58,8 +58,14 @@
 }
 
 .error {
-  color: var(--color-2);
+  color: #e74c3c;
   font-size: var(--font-size-3);
+  font-family: var(--font-fam-2);
   text-align: center;
   margin-bottom: var(--spacing-2);
+}
+
+.submitButton {
+  margin-top: var(--spacing-3);
+  width: 100%;
 }
