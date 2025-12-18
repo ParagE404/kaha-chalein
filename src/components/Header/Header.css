@@ -5,10 +5,11 @@
     justify-content: flex-end;
     align-items: flex-start;
     padding: var(--left-right-padding);
-    gap: var(--spacing-1);
+    gap: var(--spacing-2);
     position: relative;
     height: auto;
-    min-height: 280px;
+    min-height: 220px;
+    overflow: hidden;
 }
 
 .Header .title{
@@ -16,28 +17,39 @@
     font-size: var(--font-size-12);
     font-weight: 400;
     color: var(--color-1);
-    line-height: 100%;
+    line-height: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: var(--spacing-2);
     z-index: 2;
+    opacity: 0;
+    animation: fadeInScale 1s ease forwards;
+    animation-delay: 0.3s;
 }
 
 .Header .logo{
-    width: 53px;
-    height: 53px;
+    width: 45px;
+    height: 45px;
     object-fit: contain;
     z-index: 2;
+    transition: transform var(--transition-normal);
+}
+
+.Header .logo:hover {
+    transform: rotate(10deg) scale(1.05);
 }
 
 .Header .title-2{
     font-family: var(--font-fam-2);
     font-size: var(--font-size-9);
-    line-height: 100%;
+    line-height: 1;
     font-weight: 600;
     color: var(--color-1);
     z-index: 2;
+    opacity: 0;
+    animation: fadeInSlide 0.8s ease forwards;
+    animation-delay: 0.5s;
 }
 
 .Header .background{
@@ -50,4 +62,73 @@
     right: 0;
     bottom: 0;
     z-index: 1;
+    opacity: 0.9;
+    transition: transform var(--transition-slow);
+}
+
+.Header:hover .background {
+    transform: scale(1.02);
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Mobile optimizations */
+@media (max-width: 480px) {
+    .Header {
+        min-height: 180px;
+        padding: var(--left-right-padding) var(--left-right-padding) var(--spacing-3);
+    }
+    
+    .Header .logo {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .Header .title {
+        font-size: var(--font-size-10);
+    }
+    
+    .Header .title-2 {
+        font-size: var(--font-size-7);
+    }
+}
+
+@media (max-width: 360px) {
+    .Header {
+        min-height: 160px;
+        padding: var(--left-right-padding) var(--left-right-padding) var(--spacing-2);
+    }
+    
+    .Header .logo {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .Header .title {
+        font-size: var(--font-size-9);
+    }
+    
+    .Header .title-2 {
+        font-size: var(--font-size-6);
+    }
 }

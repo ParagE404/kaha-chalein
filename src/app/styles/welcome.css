@@ -7,18 +7,25 @@
   align-items: center;
   justify-content: start;
   padding: 0px;
-  background-color: var(--background);
+  background: linear-gradient(135deg, var(--background) 0%, #fafafa 100%);
   max-width: var(--max-width);
   margin: 0 auto;
+  position: relative;
+  overflow: auto;
 }
 
 .Welcome .text-1{
   margin-top: var(--spacing-4);
   font-family: var(--font-fam-2);
   font-size: var(--font-size-3);
-  font-weight: 400;
+  font-weight: 500;
   color: var(--color-1);
-  line-height: 100%;
+  line-height: 1.4;
+  text-align: center;
+  padding: 0 var(--left-right-padding);
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: 0.2s;
 }
 
 .Welcome .images-container{
@@ -26,19 +33,37 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
-  gap: var(--spacing-1);
+  gap: var(--spacing-2);
+  margin: var(--spacing-4) 0;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: 0.4s;
 }
 
 .Welcome .image-1{
-  width: 168px;
-  height: 267px;
+  width: 140px;
+  height: 220px;
   object-fit: contain;
+  border-radius: var(--border-radius-2);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-normal);
+}
+
+.Welcome .image-1:hover {
+  transform: translateY(-4px) rotate(-2deg);
 }
 
 .Welcome .image-2{
-  width: 168px;
-  height: 267px;
+  width: 140px;
+  height: 220px;
   object-fit: contain;
+  border-radius: var(--border-radius-2);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-normal);
+}
+
+.Welcome .image-2:hover {
+  transform: translateY(-4px) rotate(2deg);
 }
 
 .Welcome .text-2{
@@ -47,14 +72,80 @@
   font-style: italic;
   font-weight: 400;
   color: var(--color-1);
-  line-height: 100%;
-  margin-bottom: var(--spacing-3);
+  line-height: 1.4;
+  margin-bottom: var(--spacing-4);
+  text-align: center;
+  padding: 0 var(--left-right-padding);
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: 0.6s;
 }
 
 .Welcome .get-started-btn{
   margin-bottom: var(--spacing-3);
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: 0.8s;
+  transform: translateY(20px);
 }
 
 .Welcome .footer{
   margin-top: auto;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 480px) {
+  .Welcome .text-1 {
+    margin-top: var(--spacing-3);
+    font-size: var(--font-size-2);
+  }
+  
+  .Welcome .images-container {
+    margin: var(--spacing-3) 0;
+  }
+  
+  .Welcome .image-1,
+  .Welcome .image-2 {
+    width: 120px;
+    height: 190px;
+  }
+  
+  .Welcome .text-2 {
+    font-size: var(--font-size-2);
+    margin-bottom: var(--spacing-3);
+  }
+}
+
+@media (max-width: 360px) {
+  .Welcome .text-1 {
+    margin-top: var(--spacing-2);
+    font-size: var(--font-size-1);
+  }
+  
+  .Welcome .images-container {
+    margin: var(--spacing-2) 0;
+    gap: var(--spacing-1);
+  }
+  
+  .Welcome .image-1,
+  .Welcome .image-2 {
+    width: 100px;
+    height: 160px;
+  }
+  
+  .Welcome .text-2 {
+    font-size: var(--font-size-1);
+    margin-bottom: var(--spacing-2);
+  }
 }

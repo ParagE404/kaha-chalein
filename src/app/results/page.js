@@ -58,7 +58,7 @@ function ResultsPageContent() {
   if (isLoading) {
     return (
       <div className={styles.container}>
-        <div className={styles.loading}>Loading results...</div>
+        <div className={styles.loading}>Loading...</div>
       </div>
     );
   }

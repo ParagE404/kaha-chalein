@@ -333,7 +333,7 @@ function CardsPageContent() {
   if (isLoading) {
     return (
       <div className={styles.container}>
-        <div className={styles.loading}>Loading restaurants...</div>
+        <div className={styles.loading}>Loading...</div>
       </div>
     );
   }
@@ -384,7 +384,7 @@ function CardsPageContent() {
             <p>Please vote on all restaurants to continue.</p>
           )}
         </div> */}
-        <div className={styles.loadingText}>Loading Results</div>
+        <div className={styles.loadingText}>Loading</div>
         <Image className={styles.resultsImage} src={background} alt="Results" width={100} height={100} />
       </div>
     );
