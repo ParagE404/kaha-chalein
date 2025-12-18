@@ -7,13 +7,13 @@ const Header = () => {
   return (
     <div className="Header">
       <div className="title">
-        Kaha
+        Din-der
         <Image className="logo" width={53} height={53} src={logo} alt="logo" />
       </div>
-      <div className="title-2">CHALEIN?</div>
+      {/* <div className="title-2">CHALEIN?</div> */}
       <Image className="background" src={background} alt="logo" />
     </div>
-  );
+  )
 };
 
 export default Header;

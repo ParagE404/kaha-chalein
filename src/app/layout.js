@@ -25,7 +25,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata = {
-  title: "Kaha Chalein?",
+  title: "Din-der",
   description: "Let's decide where to eat together!",
   icons: {
     icon: '/favicon.png',

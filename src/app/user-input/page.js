@@ -234,16 +234,15 @@ export default function UserInput() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="mobile">Mobile Number</label>
+          <label htmlFor="mobile">Mobile Number (Optional)</label>
           <input
             type="tel"
             id="mobile"
             name="mobile"
             value={formData.mobile}
             onChange={handleChange}
-            required
             pattern="[0-9]{10}"
-            placeholder="Enter 10-digit mobile number"
+            placeholder="Enter 10-digit mobile number (optional)"
           />
         </div>
 

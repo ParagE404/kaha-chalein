@@ -18,9 +18,9 @@
     color: var(--color-1);
     line-height: 100%;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: var(--spacing-1);
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-2);
     z-index: 2;
 }
 
