@@ -2,7 +2,7 @@
 
 **A sophisticated real-time group decision-making platform for restaurant selection**
 
-A full-stack mobile-first web application that eliminates the "I'm fine with anything" problem when groups try to decide where to eat. Built with modern web technologies and real-time collaboration features.
+A full-stack web application that eliminates the "I'm fine with anything" problem when groups try to decide where to eat. Built with modern web technologies and real-time collaboration features.
 
 ![Tech Stack](https://img.shields.io/badge/Next.js-15.3.2-black?style=flat-square&logo=next.js)
 ![React](https://img.shields.io/badge/React-19.0.0-blue?style=flat-square&logo=react)
