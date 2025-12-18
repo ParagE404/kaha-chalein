@@ -1,4 +1,4 @@
-# Kaha Chalein 🍽️
+# Kaha Chalein 🍽️ (Dinder)
 
 **A sophisticated real-time group decision-making platform for restaurant selection**
 
